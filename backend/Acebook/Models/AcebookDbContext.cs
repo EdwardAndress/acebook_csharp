@@ -5,6 +5,7 @@ public class AcebookDbContext : DbContext
 {
     public DbSet<Post>? Posts { get; set; }
     public DbSet<User>? Users { get; set; }
+
     public string? DbHost = Environment.GetEnvironmentVariable("DB_HOST") ?? "localhost";
 
     public string? DbUsername = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "postgres";

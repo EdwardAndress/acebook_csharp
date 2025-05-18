@@ -12,7 +12,7 @@ using acebook.Models;
 namespace acebook.Migrations
 {
     [DbContext(typeof(AcebookDbContext))]
-    [Migration("20250518175435_CreateComments")]
+    [Migration("20250518184409_CreateComments")]
     partial class CreateComments
     {
         /// <inheritdoc />
