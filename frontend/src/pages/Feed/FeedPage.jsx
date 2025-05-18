@@ -39,13 +39,7 @@ export const FeedPage = () => {
     event.preventDefault();
     try {
       const response = await createPost(token, message);
-
-      // Add the newly created post to the page
-      // const newPost = {
-      //   message: response.Message
-      // };
-
-      setPosts([response.post, ...posts]); // Add new message to existing posts using response data
+      setPosts([response.post, ...posts]);
       setMessage("");
       navigate("/posts");
     } catch (err) {
