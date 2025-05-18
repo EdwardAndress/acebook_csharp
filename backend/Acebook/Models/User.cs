@@ -10,6 +10,7 @@ public class User
 
   public string? Email { get; set; }
   
+  // validates password
   [RegularExpression(@"^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Password is invalid.")]
   public string? Password { get; set; }
 
