@@ -24,29 +24,32 @@ public class UsersController : ControllerBase
       AcebookDbContext dbContext = new AcebookDbContext();
       bool EmailExists = dbContext.Users?.Any(u => u.Email == user.Email) ?? false;
       bool UsernameExists = dbContext.Users?.Any(u => u.Username == user.Username) ?? false;
+
       Regex validatePasswordRegex = new Regex("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-      //Console.WriteLine($"{user.Password} is {validatePasswordRegex.IsMatch(user.Password)}");  // prints True
-      //regex = Must have one number, one special character and 8 characters long.
       Regex validateEmailRegex = new Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
-      //Console.WriteLine($"{user.Email} is {validateEmailRegex.IsMatch(user.Email)}");  // prints True     
-      // Console.WriteLine($"username is {user.Username} ");
-      if(EmailExists || UsernameExists){
+
+      if (EmailExists || UsernameExists)
+      {
         Console.WriteLine($"Email or username already in db");
-        return BadRequest(); 
+        return BadRequest();
       }
-      else if(user.Username == null || user.Username == ""){
-          Console.WriteLine($"Username does not exist");
-          return BadRequest();
+      else if (user.Username == null || user.Username == "")
+      {
+        Console.WriteLine($"Username does not exist");
+        return BadRequest();
       }
-      else if(user.Email == null || validateEmailRegex.IsMatch(user.Email) == false){
-          Console.WriteLine($"Email null or invalid");
-          return BadRequest();
+      else if (user.Email == null || validateEmailRegex.IsMatch(user.Email) == false)
+      {
+        Console.WriteLine($"Email null or invalid");
+        return BadRequest();
       }
-      else if(user.Password == null || validatePasswordRegex.IsMatch(user.Password) == false){
+      else if (user.Password == null || validatePasswordRegex.IsMatch(user.Password) == false)
+      {
         Console.WriteLine($"password null or invalid");
-        return BadRequest(); 
+        return BadRequest();
       }
-      else{  
+      else
+      {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
         dbContext.Users.Add(user);
